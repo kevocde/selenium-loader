@@ -5,4 +5,4 @@ __version__ = "0.1.0"
 from .action_executor import ActionExecutor
 from .config import BrowserType, Config
 from .custom_web_driver_handler import CustomWebDriverHandler
-from .web_driver_facade import WebDriverFacade
+from .browser import Browser

@@ -9,7 +9,7 @@ from .action_executor import ActionExecutor
 
 
 
-class WebDriverFacade:
+class Browser:
   EQUVALENCES = equivalences = {
     BrowserType.CHROME.value: [ChromeOptions, Chrome],
     BrowserType.FIREFOX.value: [FirefoxOptions, Firefox],

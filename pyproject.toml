@@ -5,6 +5,9 @@ requires = [
   "selenium>=4.8.0",
   "typer>=0.7.0",
 ]
+packages = [
+    { include = "src" }
+]
 
 [project]
 name = "selenium_loader"
