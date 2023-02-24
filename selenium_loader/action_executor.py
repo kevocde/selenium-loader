@@ -10,11 +10,6 @@ class ActionExecutor:
     self._custom_web_driver_handler = CustomWebDriverHandler()
 
 
-  @property
-  def config(self) -> Config:
-    return self._config
-
-
   def run(self):
     with self._driver as driver:
       for step_config in self._config.get('steps'):

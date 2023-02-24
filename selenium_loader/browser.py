@@ -25,6 +25,10 @@ class Browser:
     self._load_browser_props()
     self._action_executor = ActionExecutor(self._driver, self._config)
 
+  @property
+  def config(self) -> Config:
+    return self._config
+
 
   def _load_browser_props(self):
     """Loads browser driver instance and options"""
