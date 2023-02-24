@@ -1,6 +1,6 @@
 """Configuration loader and action executor for Selenium"""
 
-__version__ = "0.1.4"
+__version__ = "0.1.5"
 
 from .action_executor import ActionExecutor
 from .config import BrowserType, Config
