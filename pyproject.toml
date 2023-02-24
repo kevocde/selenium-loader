@@ -2,9 +2,6 @@
 requires = ["flit_core >=2,<3"]
 build-backend = "flit_core.buildapi"
 
-[tool.flit.module]
-name = "browser"
-
 [project]
 name = "selenium_loader"
 authors = [{name = "kevocde", email = "kevocde@gmail.com"}]
