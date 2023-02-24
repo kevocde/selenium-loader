@@ -1,12 +1,9 @@
 [build-system]
+requires = ["flit_core >=2,<3"]
 build-backend = "flit_core.buildapi"
-requires = ["flit_core >=3.2,<4"]
-packages = [
-    { include = "src" }
-]
 
 [tool.flit.module]
-name = "src.selenium_loader"
+name = "browser"
 
 [project]
 name = "selenium_loader"
