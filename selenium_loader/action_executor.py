@@ -17,7 +17,8 @@ class ActionExecutor:
 
 
   def _execute_step(self, driver: WebDriver, step_config: any) -> None:
-    print("Executing step: {}".format(step_config["name"]))
+    if self._config.get("general.verbose", False):
+      print("Executing step: {}".format(step_config["name"]))
 
     for action_config in step_config["actions"]:
       result = self.call_method_dynamically(
