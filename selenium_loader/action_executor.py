@@ -12,7 +12,7 @@ class ActionExecutor:
 
   def run(self):
     with self._driver as driver:
-      for step_config in self._config.get('steps'):
+      for step_config in self._config.get('steps', []):
         self._execute_step(driver, step_config)
 
 
@@ -43,8 +43,10 @@ class ActionExecutor:
     if not object:
       raise Exception("Imposible call method on None object")
 
-    if not callable(getattr(object, command)):
-      raise Exception("Object {} has no method {}".format(object, command))
+    hasattribute = hasattr(object, command)
+
+    if not hasattribute or (hasattribute and not callable(getattr(object, command))):
+      raise Exception("Object {} has no method {}".format(object.__class__.__name__, command))
 
     params_type = type(parameters)
 
