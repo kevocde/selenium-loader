@@ -1,5 +1,5 @@
 from selenium.webdriver.remote.webdriver import WebDriver
-from .config import Config
+from .utils import Config
 from .custom_web_driver_handler import CustomWebDriverHandler
 
 

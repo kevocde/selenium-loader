@@ -3,6 +3,6 @@
 __version__ = "0.1.7"
 
 from .action_executor import ActionExecutor
-from .config import BrowserType, Config
+from .utils import BrowserType, Config
 from .custom_web_driver_handler import CustomWebDriverHandler
 from .browser import Browser

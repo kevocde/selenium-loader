@@ -4,7 +4,7 @@ from selenium.webdriver.common.options import ArgOptions
 from selenium.webdriver import ChromeOptions, FirefoxOptions, EdgeOptions, IeOptions, WebKitGTKOptions
 from selenium.webdriver import Chrome, Firefox, Edge, Ie, WebKitGTK, Safari
 from selenium.webdriver.safari.options import Options as SafariOptions
-from .config import Config, BrowserType
+from .utils import Config, BrowserType
 from .action_executor import ActionExecutor
 
 
