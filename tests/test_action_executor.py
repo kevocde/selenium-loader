@@ -55,7 +55,7 @@ class ActionExecutorTest(unittest.TestCase):
 
 
   def test_run_with_one_invalid_step(self):
-    self._config_mock.get = Mock(args=("steps", []), return_value=[1])
+    self._config_mock.get = Mock(args=("steps", []), return_value=[])
 
     action_executor = selenium_loader.ActionExecutor(self._driver_mock, self._config_mock)
     action_executor.run()
