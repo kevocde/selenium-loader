@@ -1,3 +1,7 @@
+# Editors
+.vscode
+
+# Project
 **/dist
 **/env
 **/config/*
