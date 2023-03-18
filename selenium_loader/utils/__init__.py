@@ -11,7 +11,7 @@ class Config:
 
 	def variable_resolver(self, data: str | dict) -> str | dict:
 		if not data:
-			return None
+			return data
 
 		was_object = isinstance(data, dict) or isinstance(data, list)
 		data = json.dumps(data) if was_object else data

@@ -9,6 +9,9 @@ from .action_executor import ActionExecutor
 
 
 class Browser:
+	"""Abstraction for all browser drivers"""
+
+	"""Equivalences between browser type and driver and options"""
 	EQUVALENCES = equivalences = {
 		BrowserType.CHROME.value: [ChromeOptions, Chrome],
 		BrowserType.FIREFOX.value: [FirefoxOptions, Firefox],
@@ -27,6 +30,14 @@ class Browser:
 	def config(self) -> Config:
 		return self._config
 
+	@property
+	def driver(self) -> ArgOptions | Chrome | Firefox | Edge | Ie | WebKitGTK | Safari:
+		return self._driver
+
+	def run(self) -> None:
+		"""Init the action executor to interact with the browser"""
+		self._action_executor.run()
+
 	def _load_browser_props(self):
 		"""Loads browser driver instance and options"""
 		if self._config.get('general.browser.type') not in self.EQUVALENCES:
@@ -37,54 +48,20 @@ class Browser:
 			self._driver = driver_class(self._config.get('general.browser.driver'), options=self._options)
 
 	def _create_options(self, options_class):
+		"""Creates the options instance for the browser and loads the options"""
 		options = options_class()
-
 		for opt_key, opt_value in self._config.get('general.browser.options', {}).items():
 			if hasattr(options_class, opt_key):
 				if callable(getattr(options_class, opt_key)):
 					self._load_browser_method(options, opt_key, opt_value)
 				else:
 					setattr(options, opt_key, opt_value)
-
 		return options
 
 	def _load_browser_method(self, options, opt_key, opt_value) -> None:
-		if isinstance(opt_value, list):
-			for value in opt_value:
-				if "key" in value and "activate" in value and value["activate"]:
-					getattr(options, opt_key)("--{}".format(value["key"]))
-				elif "key" in value and "value" in value:
-					getattr(options, opt_key)(value["key"], value["value"])
-				else:
-					pass
-		else:
+		"""Loads the options method with the given arguments"""
+		if isinstance(opt_value, dict):
 			getattr(options, opt_key)(**opt_value)
-
-	def _load_browser_options(self) -> None:
-		equivalences = {
-			BrowserType.CHROME.value: ChromeOptions,
-			BrowserType.FIREFOX.value: FirefoxOptions,
-			BrowserType.EDGE.value: EdgeOptions,
-			BrowserType.IE.value: IeOptions,
-			BrowserType.SAFARI.value: SafariOptions,
-			BrowserType.WEBKITGTK.value: WebKitGTKOptions
-		}
-
-		if self._config.get('general.browser.type') not in equivalences:
-			raise Exception('Browser type not supported')
 		else:
-			self._options = equivalences[self._config.get('general.browser.type')]()
-
-			for opt_key, opt_value in self._config.get('general.browser.options', {}).items():
-				if hasattr(self._options, opt_key):
-					if callable(getattr(self._options, opt_key)):
-						self._load_browser_method(opt_key, opt_value)
-					else:
-						self._load_browser_attribute(opt_key, opt_value)
-
-	def run(self) -> None:
-		self._action_executor.run()
-
-	@property
-	def driver(self) -> ArgOptions | Chrome | Firefox | Edge | Ie | WebKitGTK | Safari:
-		return self._driver
+			print(*opt_value)
+			getattr(options, opt_key)(*opt_value)
