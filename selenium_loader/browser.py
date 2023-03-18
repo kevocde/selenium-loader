@@ -62,6 +62,7 @@ class Browser:
 		"""Loads the options method with the given arguments"""
 		if isinstance(opt_value, dict):
 			getattr(options, opt_key)(**opt_value)
-		else:
-			print(*opt_value)
+		elif isinstance(opt_value, list):
 			getattr(options, opt_key)(*opt_value)
+		else:
+			getattr(options, opt_key)(opt_value)
