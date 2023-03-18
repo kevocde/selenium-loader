@@ -1,5 +1,4 @@
-import types
-
+from inspect import signature
 from selenium.webdriver.common.options import ArgOptions
 from selenium.webdriver import ChromeOptions, FirefoxOptions, EdgeOptions, IeOptions, WebKitGTKOptions
 from selenium.webdriver import Chrome, Firefox, Edge, Ie, WebKitGTK, Safari
@@ -63,6 +62,10 @@ class Browser:
 		if isinstance(opt_value, dict):
 			getattr(options, opt_key)(**opt_value)
 		elif isinstance(opt_value, list):
-			getattr(options, opt_key)(*opt_value)
+			if (len(signature(getattr(options, opt_key)).parameters) > 1):
+				getattr(options, opt_key)(*opt_value)
+			else:
+				for value in opt_value:
+					getattr(options, opt_key)(value)
 		else:
 			getattr(options, opt_key)(opt_value)
